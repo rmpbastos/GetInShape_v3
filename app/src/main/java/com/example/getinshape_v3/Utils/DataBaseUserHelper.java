@@ -2,6 +2,7 @@ package com.example.getinshape_v3.Utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -54,5 +55,18 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
         } else {
             return true;
         }
+    }
+
+    // TODO: 'WHERE EMAIL =?'
+//    public Cursor getUserRecommendedIntake(String email) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT RECOMMENDED_CALORIE_INTAKE FROM " + TABLE_NAME, null);
+//        return cursor;
+//    }
+
+    public Cursor getUserRecommendedIntake() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT RECOMMENDED_CALORIE_INTAKE FROM " + TABLE_NAME, null);
+        return cursor;
     }
 }

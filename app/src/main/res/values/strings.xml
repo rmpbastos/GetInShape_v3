@@ -21,6 +21,10 @@
     <string name="date_added">Date added:</string>
     <string name="add_to_diary">Add to Diary</string>
 
+    <string name="your_target">Your Target:</string>
+    <string name="consumed">Consumed:</string>
+    <string name="remaining">Remaining:</string>
+
     <string-array name="txtGender">
         <item>Female</item>
         <item>Male</item>

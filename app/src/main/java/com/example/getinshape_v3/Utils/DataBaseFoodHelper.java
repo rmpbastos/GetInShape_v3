@@ -2,6 +2,7 @@ package com.example.getinshape_v3.Utils;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -49,22 +50,29 @@ public class DataBaseFoodHelper extends SQLiteOpenHelper {
         }
     }
 
-//    public Boolean insertFoodData(long localDateTime, String email, String foodName,
-//                                  double servingSize, double calories) {
+    // TODO: 'WHERE EMAIL =?'
+//    public Cursor getUserFoodData(String email) {
 //        db = this.getWritableDatabase();
-//        ContentValues contentValues = new ContentValues();
-//        contentValues.put("LOCAL_DATE_TIME", localDateTime);
-//        contentValues.put("EMAIL", email);
-//        contentValues.put("FOOD_NAME", foodName);
-//        contentValues.put("SERVING_SIZE_G", servingSize);
-//        contentValues.put("CALORIES", calories);
-//        long result = db.insert(TABLE_NAME, null, contentValues);
-//
-//        if (result == -1) {
-//            return false;
-//        } else {
-//            return true;
-//        }
+//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+//        return cursor;
 //    }
 
+    public Cursor getUserFoodData() {
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        return cursor;
+    }
+
+    // TODO: 'WHERE EMAIL =?'
+//    public Cursor getCalorieIntake(String email) {
+//        db = this.getWritableDatabase();
+//        Cursor cursor = db.rawQuery("SELECT SUM(CALORIES) FROM " + TABLE_NAME, null);
+//        return cursor;
+//    }
+
+    public Cursor getCalorieIntake() {
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT SUM(CALORIES) FROM " + TABLE_NAME, null);
+        return cursor;
+    }
 }

@@ -73,9 +73,9 @@ public class SearchFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         Bundle b = intent.getExtras();
 
-        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
-
         currentUserEmail = b.getString("currentUserEmail");
+
+        queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         foodTextView = (TextView) getView().findViewById(R.id.food_textView);
         servingSizeTextView = (TextView) getView().findViewById(R.id.serving_size_textView);
@@ -219,7 +219,6 @@ public class SearchFragment extends Fragment {
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
         fragmentChangeListener.replaceFragment(fragment);
     }
-
 
     public interface OnFragmentInteractionListener {
         //TODO: Update argument type and name
