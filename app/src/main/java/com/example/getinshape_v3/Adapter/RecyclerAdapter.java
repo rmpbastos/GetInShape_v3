@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.getinshape_v3.MainActivity;
@@ -40,7 +41,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     @NonNull
     @Override
-    public RecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.card, parent, false);
         ViewHolder viewHolder = new ViewHolder(v);
         return viewHolder;
@@ -65,6 +66,10 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
+        //
+        CardView cardView;
+
+
         TextView food_id, serving_id, calories_id, timestamp_id;
 
         public ViewHolder(@NonNull View itemView) {
@@ -73,6 +78,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             serving_id = itemView.findViewById(R.id.food_serving);
             calories_id = itemView.findViewById(R.id.food_calories);
             timestamp_id = itemView.findViewById(R.id.food_timestamp);
+            cardView = itemView.findViewById(R.id.card_view);
         }
 
     }
