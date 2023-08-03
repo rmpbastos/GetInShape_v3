@@ -38,14 +38,14 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
                                      String activityLevel, String objective, double recommendedCalorieIntake) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put("email", email);
-        contentValues.put("age", age);
-        contentValues.put("height", height);
-        contentValues.put("weight", weight);
-        contentValues.put("gender", gender);
-        contentValues.put("activity_level", activityLevel);
-        contentValues.put("objective", objective);
-        contentValues.put("recommended_calorie_intake", recommendedCalorieIntake);
+        contentValues.put("EMAIL", email);
+        contentValues.put("USER_AGE", age);
+        contentValues.put("USER_HEIGHT", height);
+        contentValues.put("USER_WEIGHT", weight);
+        contentValues.put("USER_GENDER", gender);
+        contentValues.put("USER_ACTIVITY_LEVEL", activityLevel);
+        contentValues.put("USER_OBJECTIVE", objective);
+        contentValues.put("RECOMMENDED_CALORIE_INTAKE", recommendedCalorieIntake);
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         if (result == -1) {
