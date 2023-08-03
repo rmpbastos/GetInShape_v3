@@ -15,7 +15,8 @@ import com.example.getinshape_v3.databinding.ActivityMainBinding;
 public class MainActivity extends AppCompatActivity implements
                                     HomeFragment.OnFragmentInteractionListener,
                                     SearchFragment.OnFragmentInteractionListener,
-                                    DiaryFragment.OnFragmentInteractionListener {
+                                    DiaryFragment.OnFragmentInteractionListener,
+                                    FragmentChangeListener {
 
     ActivityMainBinding binding;
 
@@ -46,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements
         });
     }
 
-    private void replaceFragment(Fragment fragment) {
+    @Override
+    public void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
@@ -54,6 +56,15 @@ public class MainActivity extends AppCompatActivity implements
         fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
+//    public void replaceFragment(Fragment fragment) {
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.frame_layout, fragment);
+//        fragmentTransaction.setReorderingAllowed(true);
+//        fragmentTransaction.addToBackStack(null);
+//        fragmentTransaction.commit();
+//    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {

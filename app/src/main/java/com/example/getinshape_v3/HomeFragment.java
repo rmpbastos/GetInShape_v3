@@ -133,7 +133,7 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_SHORT).show();
                 }
 
-//                openSearchFragment();
+                openSearchFragment();
 
             }
         });
@@ -172,11 +172,11 @@ public class HomeFragment extends Fragment {
         }
     }
 
-//    private void openSearchFragment() {
-//        Intent intent = new Intent(getActivity().getApplicationContext(), SearchFragment.class);
-//        startActivity(intent);
-//    }
-
+    public void openSearchFragment() {
+        Fragment fragment = new SearchFragment();
+        FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
+        fragmentChangeListener.replaceFragment(fragment);
+    }
 
     public interface OnFragmentInteractionListener {
         //TODO: Update argument type and name
