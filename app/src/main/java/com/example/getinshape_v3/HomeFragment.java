@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -131,6 +133,8 @@ public class HomeFragment extends Fragment {
                     Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_SHORT).show();
                 }
 
+//                openSearchFragment();
+
             }
         });
     }
@@ -167,6 +171,12 @@ public class HomeFragment extends Fragment {
             recommendedCalorieIntake = tdee * 1.15;
         }
     }
+
+//    private void openSearchFragment() {
+//        Intent intent = new Intent(getActivity().getApplicationContext(), SearchFragment.class);
+//        startActivity(intent);
+//    }
+
 
     public interface OnFragmentInteractionListener {
         //TODO: Update argument type and name
