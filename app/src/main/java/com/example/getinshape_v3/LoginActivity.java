@@ -15,6 +15,8 @@ public class LoginActivity extends AppCompatActivity {
     ActivityLoginBinding binding;
     DataBaseLoginHelper dataBaseLoginHelper;
 
+    String currentUserEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +38,12 @@ public class LoginActivity extends AppCompatActivity {
                     Boolean checkCredentials = dataBaseLoginHelper.checkEmailPassword(email, password);
 
                     if (checkCredentials == true) {
+                        currentUserEmail = email;
                         Toast.makeText(LoginActivity.this, "Login Successful", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                        Bundle b = new Bundle();
+                        b.putString("currentUserEmail", currentUserEmail);
+                        intent.putExtras(b);
                         startActivity(intent);
                     } else {
                         Toast.makeText(LoginActivity.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();

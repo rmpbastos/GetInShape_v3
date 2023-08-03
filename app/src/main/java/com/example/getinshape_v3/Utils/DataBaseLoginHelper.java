@@ -14,7 +14,7 @@ public class DataBaseLoginHelper extends SQLiteOpenHelper {
     public static final String TABLE_NAME = "allUsers";
 
     public DataBaseLoginHelper(@Nullable Context context) {
-        super(context, "Signup.db", null, 1);
+        super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
