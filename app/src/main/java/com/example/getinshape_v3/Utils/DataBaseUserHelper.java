@@ -12,10 +12,10 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "UserData.db";
     public static final String TABLE_NAME = "userDetails";
 
-    DataBaseLoginHelper dataBaseLoginHelper;
+//    DataBaseLoginHelper dataBaseLoginHelper;
 
     //TODO: DELETE AFTER TESTS - HARDCODED VARIABLE
-    String currentUserEmail = "rafabastos@email.com";
+//    String currentUserEmail = "rafabastos@email.com";
 
 
     public DataBaseUserHelper(@Nullable Context context) {
@@ -34,6 +34,7 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
     }
 
+    //Insert data to table
     public Boolean insertUserDetails(String email, int age, int height, double weight, String gender,
                                      String activityLevel, String objective, double recommendedCalorieIntake) {
         SQLiteDatabase db = this.getWritableDatabase();
