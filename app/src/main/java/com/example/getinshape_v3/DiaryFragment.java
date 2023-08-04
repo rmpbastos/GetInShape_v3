@@ -15,10 +15,12 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.getinshape_v3.Adapter.FoodAdapter;
 import com.example.getinshape_v3.FoodModel.FoodModel;
@@ -95,11 +97,12 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
             calories_remainingTV.setText(calories_remaining_str);
         } catch (Exception e) {
             e.printStackTrace();
-//            Toast.makeText(getActivity().getApplicationContext(), "Oops, the diary is empty", Toast.LENGTH_LONG).show();
+            Toast.makeText(getActivity().getApplicationContext(), "Oops, your diary is empty!", Toast.LENGTH_LONG).show();
         }
 
         //Add reference to RecyclerViewTouchHelper
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerViewTouchHelper(foodAdapter));
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerViewTouchHelper(foodAdapter, context,
+                currentUserEmail, calories_eaten_todayTV, calorie_targetTV, calories_remainingTV));
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     }

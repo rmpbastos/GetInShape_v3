@@ -10,6 +10,8 @@ import androidx.annotation.Nullable;
 
 public class DataBaseLoginHelper extends SQLiteOpenHelper {
 
+    SQLiteDatabase db;
+
     public static final String DATABASE_NAME = "Signup.db";
     public static final String TABLE_NAME = "allUsers";
 
@@ -28,7 +30,7 @@ public class DataBaseLoginHelper extends SQLiteOpenHelper {
     }
 
     public Boolean insertData(String email, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("email", email);
         contentValues.put("password", password);
@@ -42,7 +44,7 @@ public class DataBaseLoginHelper extends SQLiteOpenHelper {
     }
 
     public Boolean checkEmail(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{email});
 
@@ -54,7 +56,7 @@ public class DataBaseLoginHelper extends SQLiteOpenHelper {
     }
 
     public Boolean checkEmailPassword(String email, String password) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE EMAIL = ? AND PASSWORD = ?",
                 new String[]{email, password});
 

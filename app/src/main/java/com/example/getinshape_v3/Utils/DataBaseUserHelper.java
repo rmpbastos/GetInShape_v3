@@ -58,4 +58,48 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(email)});
         return cursor;
     }
+
+
+    // FOR THE HOME FRAGMENT - LOAD WHEN USER ALREADY EXISTS
+    public Cursor getUserAge(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT USER_AGE FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
+
+    public Cursor getUserHeight(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT USER_HEIGHT FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
+
+    public Cursor getUserWeight(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT USER_WEIGHT FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
+
+    public Cursor getUserGender(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT USER_GENDER FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
+
+    public Cursor getUserActivityLevel(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT USER_ACTIVITY_LEVEL FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
+
+    public Cursor getUserObjective(String email) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT USER_OBJECTIVE FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
 }

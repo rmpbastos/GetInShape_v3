@@ -1,6 +1,7 @@
 package com.example.getinshape_v3;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -13,6 +14,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -36,12 +38,13 @@ public class HomeFragment extends Fragment {
     //Recommended calorie intake
     double recommendedCalorieIntake;
 
-    //TODO: DELETE AFTER TESTS - HARDCODED VARIABLE
-//    String currentUserEmail = "rafabastos@email.com";
-
     String currentUserEmail;
 
     DataBaseUserHelper dataBaseUserHelper;
+
+    int currentUserAge, currentUserHeight;
+    double currentUserWeight;
+    String currentUserGender, currentUserActivityLevel, currentUserObjective;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,6 +61,9 @@ public class HomeFragment extends Fragment {
         Bundle b = intent.getExtras();
         currentUserEmail = b.getString("currentUserEmail");
 
+        //Initialize dataBaseUserHelper
+        dataBaseUserHelper = new DataBaseUserHelper(getActivity().getApplicationContext());
+
         ageEditText = (EditText) getView().findViewById(R.id.age_editText);
         heightEditText = (EditText) getView().findViewById(R.id.height_editText);
         weightEditText = (EditText) getView().findViewById(R.id.weight_editText);
@@ -66,7 +72,36 @@ public class HomeFragment extends Fragment {
         objectiveSpinner = (Spinner) getView().findViewById(R.id.objective_spinner);
         saveButton = (Button) getView().findViewById(R.id.save_button);
 
-        dataBaseUserHelper = new DataBaseUserHelper(getActivity().getApplicationContext());
+
+        // Load the user information if it exists
+        try {
+            currentUserAge = getUserAge(currentUserEmail);
+            if (currentUserAge > 0) {
+                currentUserHeight = getUserHeight(currentUserEmail);
+                currentUserWeight = getUserWeight(currentUserEmail);
+                currentUserGender = getUserGender(currentUserEmail);
+                currentUserActivityLevel = getUserActivityLevel(currentUserEmail);
+                currentUserObjective = getUserObjective(currentUserEmail);
+
+                ageEditText.setText(String.valueOf(currentUserAge));
+                heightEditText.setText(String.valueOf(currentUserHeight));
+                weightEditText.setText(String.valueOf(currentUserWeight));
+
+                ArrayAdapter<String> genderAdapter = (ArrayAdapter<String>) genderSpinner.getAdapter();
+                int genderIndex = genderAdapter.getPosition(currentUserGender);
+                genderSpinner.setSelection(genderIndex);
+                ArrayAdapter<String> levelAdapter = (ArrayAdapter<String>) activityLevelSpinner.getAdapter();
+                int levelIndex = levelAdapter.getPosition(currentUserActivityLevel);
+                activityLevelSpinner.setSelection(levelIndex);
+                ArrayAdapter<String> objectiveAdapter = (ArrayAdapter<String>) objectiveSpinner.getAdapter();
+                int objectiveIndex = objectiveAdapter.getPosition(currentUserObjective);
+                objectiveSpinner.setSelection(objectiveIndex);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +173,55 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+    private int getUserAge(String email) {
+        Cursor result = dataBaseUserHelper.getUserAge(email);
+        while (result.moveToNext()) {
+            currentUserAge = result.getInt(0);
+        }
+        return currentUserAge;
+    }
+
+    private int getUserHeight(String email) {
+        Cursor result = dataBaseUserHelper.getUserHeight(email);
+        while (result.moveToNext()) {
+            currentUserHeight = result.getInt(0);
+        }
+        return currentUserHeight;
+    }
+
+    private double getUserWeight(String email) {
+        Cursor result = dataBaseUserHelper.getUserWeight(email);
+        while (result.moveToNext()) {
+            currentUserWeight = result.getDouble(0);
+        }
+        return currentUserWeight;
+    }
+
+    private String getUserGender(String email) {
+        Cursor result = dataBaseUserHelper.getUserGender(email);
+        while (result.moveToNext()) {
+            currentUserGender = result.getString(0);
+        }
+        return currentUserGender;
+    }
+
+    private String getUserActivityLevel(String email) {
+        Cursor result = dataBaseUserHelper.getUserActivityLevel(email);
+        while (result.moveToNext()) {
+            currentUserActivityLevel = result.getString(0);
+        }
+        return currentUserActivityLevel;
+    }
+
+    private String getUserObjective(String email) {
+        Cursor result = dataBaseUserHelper.getUserObjective(email);
+        while (result.moveToNext()) {
+            currentUserObjective = result.getString(0);
+        }
+        return currentUserObjective;
+    }
+
 
     public void calculateRecommendedCalorieIntake() {
 
