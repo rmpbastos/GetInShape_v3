@@ -1,5 +1,6 @@
 package com.example.getinshape_v3;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
@@ -8,7 +9,9 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,6 +36,8 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
     FoodAdapter foodAdapter;
     ArrayList<FoodModel> mList;
 
+    Context context;
+
     private TextView calorie_targetTV, calories_eaten_todayTV, calories_remainingTV;
 
     private String currentUserEmail, calorie_target_str, calories_eaten_str;
@@ -42,6 +47,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_diary, container, false);
+
         return v;
     }
 
@@ -60,7 +66,9 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         dataBaseFoodHelper = new DataBaseFoodHelper(getActivity());
         dataBaseUserHelper = new DataBaseUserHelper(getActivity());
         mList = new ArrayList<>();
-        foodAdapter = new FoodAdapter(dataBaseFoodHelper,  getActivity());
+
+        context = requireContext();
+        foodAdapter = new FoodAdapter(dataBaseFoodHelper, context);
 
         mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
         foodAdapter.setFood(mList);
@@ -89,6 +97,10 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
             e.printStackTrace();
 //            Toast.makeText(getActivity().getApplicationContext(), "Oops, the diary is empty", Toast.LENGTH_LONG).show();
         }
+
+        //Add reference to RecyclerViewTouchHelper
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerViewTouchHelper(foodAdapter));
+        itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     }
 
