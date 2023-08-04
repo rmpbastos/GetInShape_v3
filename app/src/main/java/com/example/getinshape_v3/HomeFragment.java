@@ -31,23 +31,21 @@ public class HomeFragment extends Fragment {
     private Spinner genderSpinner, activityLevelSpinner, objectiveSpinner;
     private Button saveButton;
 
-    private TextView homeTitle;
+    private TextView homeTitle, homeGreeting, homeBmi, homeBmiMessage;
 
-    String userGender, userActivityLevel, userObjective;
+    String userGender, userActivityLevel, userObjective, greeting;
     int userAge, userHeight;
-    double userWeight;
+    double userWeight, bmi, recommendedCalorieIntake;
 
     //Total Daily Energy Expenditure
     double tdee;
-
-    double recommendedCalorieIntake, bmi;
 
     String currentUserEmail;
 
     DataBaseUserHelper dataBaseUserHelper;
 
     int currentUserAge, currentUserHeight;
-    double currentUserWeight;
+    double currentUserWeight, currentUserBmi;
     String currentUserGender, currentUserActivityLevel, currentUserObjective;
 
     long millis;
@@ -79,7 +77,9 @@ public class HomeFragment extends Fragment {
         objectiveSpinner = (Spinner) getView().findViewById(R.id.objective_spinner);
         saveButton = (Button) getView().findViewById(R.id.save_button);
         homeTitle = (TextView) getView().findViewById(R.id.home_title);
-
+        homeGreeting = (TextView) getView().findViewById(R.id.home_greeting);
+        homeBmi = (TextView) getView().findViewById(R.id.home_bmi);
+        homeBmiMessage = (TextView) getView().findViewById(R.id.home_bmi_message);
 
         // Load the user information if it exists
         try {
@@ -107,9 +107,30 @@ public class HomeFragment extends Fragment {
                 int objectiveIndex = objectiveAdapter.getPosition(currentUserObjective);
                 objectiveSpinner.setSelection(objectiveIndex);
 
+                currentUserBmi = getUserBmi(currentUserEmail);
+                homeBmi.setText("Your Body Mass Index (BMI) is " + String.format("%.2f", currentUserBmi));
+
+                if(currentUserBmi < 18.5) {
+                    homeBmiMessage.setText("You are underweight. \nTry to keep your BMI between 18.5 and 24.9");
+                } else if (currentUserBmi > 24.9) {
+                    homeBmiMessage.setText("You are overweight. \nTry to keep your BMI between 18.5 and 24.9");
+                } else {
+                    homeBmiMessage.setText("Way to go! \nTry to maintain your BMI between 18.5 and 24.9");
+                }
+
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        // Call the greeting function
+        try {
+            greeting(currentUserEmail);
+            homeGreeting.setText("Hello, " + greeting + "!");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            homeGreeting.setText("Hello!");
         }
 
 
@@ -168,7 +189,7 @@ public class HomeFragment extends Fragment {
                 }
 
                 calculateRecommendedCalorieIntake();
-                calculateBmi();
+                bmi = calculateBmi(userHeight, userWeight);
 
                 millis = System.currentTimeMillis();
 
@@ -186,6 +207,14 @@ public class HomeFragment extends Fragment {
 
             }
         });
+    }
+
+    private double getUserBmi(String email) {
+        Cursor result = dataBaseUserHelper.getUserBmi(email);
+        while (result.moveToNext()) {
+            bmi = result.getDouble(0);
+        }
+        return bmi;
     }
 
     private int getUserAge(String email) {
@@ -270,14 +299,20 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void calculateBmi() {
-        bmi = userWeight * ((userHeight) ^ 2);
+    public double calculateBmi(double userHeight, double userWeight) {
+        bmi = userWeight / Math.pow(userHeight/ 100, 2);
+        return bmi;
     }
 
     public void openSearchFragment() {
         Fragment fragment = new SearchFragment();
         FragmentChangeListener fragmentChangeListener = (FragmentChangeListener) getActivity();
         fragmentChangeListener.replaceFragment(fragment);
+    }
+
+    public void greeting(String email) {
+        int index = email.indexOf("@");
+        greeting = email.substring(0, index);
     }
 
     public interface OnFragmentInteractionListener {

@@ -41,7 +41,7 @@ public class SignupActivity extends AppCompatActivity {
                             Boolean insert = dataBaseLoginHelper.insertData(email, password);
 
                             if (insert == true) {
-                                Toast.makeText(SignupActivity.this, "Signup Successful", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SignupActivity.this, "Signup Successful! Please login with your email and password", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                 startActivity(intent);
                             } else {

@@ -1,6 +1,7 @@
 package com.example.getinshape_v3;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -48,6 +49,8 @@ public class SearchFragment extends Fragment {
 
     DataBaseFoodHelper dataBaseFoodHelper;
 
+    DataBaseUserHelper dataBaseUserHelper;
+
     String currentUserEmail;
     String food_name;
     double serving_size_g;
@@ -80,15 +83,16 @@ public class SearchFragment extends Fragment {
         foodTextView = (TextView) getView().findViewById(R.id.food_textView);
         servingSizeTextView = (TextView) getView().findViewById(R.id.serving_size_textView);
         calorieTextView = (TextView) getView().findViewById(R.id.calorie_textView);
-        dateTextView = (TextView) getView().findViewById(R.id.date_textView);
+//        dateTextView = (TextView) getView().findViewById(R.id.date_textView);
 
         editText = (EditText) getView().findViewById(R.id.food_editText);
 
         search_button = (Button) getView().findViewById(R.id.food_button);
         add_button = (Button) getView().findViewById(R.id.add_button);
 
-        // TODO
+
         dataBaseFoodHelper = new DataBaseFoodHelper(getActivity().getApplicationContext());
+        dataBaseUserHelper = new DataBaseUserHelper(getActivity().getApplicationContext());
 
         search_button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,25 +124,25 @@ public class SearchFragment extends Fragment {
                             @Override
                             public void onClick(View v) {
 
-                                //Insert foodModel to database
-                                Boolean checkInsertData = dataBaseFoodHelper.insertFoodData(foodModel);
-                                if (checkInsertData == true) {
-                                    Toast.makeText(getActivity().getApplicationContext(), "New entry inserted!", Toast.LENGTH_LONG).show();
+                                //Check if user has entered the information in the home page
+                                Cursor cursor = dataBaseUserHelper.getUserBmi(currentUserEmail);
+                                if (cursor != null && cursor.getCount() > 0) {
+
+                                    //Insert foodModel to database
+                                    Boolean checkInsertData = dataBaseFoodHelper.insertFoodData(foodModel);
+                                    if (checkInsertData == true) {
+                                        Toast.makeText(getActivity().getApplicationContext(), "New entry inserted!", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_LONG).show();
+                                    }
+
+                                    //Open DiaryFragment
+                                    openDiaryFragment();
                                 } else {
-                                    Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_LONG).show();
+                                    Toast.makeText(getActivity().getApplicationContext(), "Please enter you personal information in the home page before adding food to your diary",
+                                            Toast.LENGTH_LONG).show();
                                 }
 
-                                //Insert the food searched into the database
-//                                Boolean checkInsertData = dataBaseFoodHelper.insertFoodData(millis, currentUserEmail,
-//                                        food_name, serving_size_g, calories);
-//                                if (checkInsertData == true) {
-//                                    Toast.makeText(getActivity().getApplicationContext(), "New entry inserted!", Toast.LENGTH_SHORT).show();
-//                                } else {
-//                                    Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_SHORT).show();
-//                                }
-
-                                //Open DiaryFragment
-                                openDiaryFragment();
                             }
                         });
                     }
@@ -201,8 +205,8 @@ public class SearchFragment extends Fragment {
             foodTextView.setText(StringUtils.capitalize(food_name.replace("\"", "")));
             servingSizeTextView.setText(String.valueOf(serving_size_g) + " g");
             calorieTextView.setText(String.valueOf(calories) + " kcal");
-            Date resultDate = new Date(millis);
-            dateTextView.setText(sdf.format(resultDate));
+//            Date resultDate = new Date(millis);
+//            dateTextView.setText(sdf.format(resultDate));
 
 
         } catch (NullPointerException e) {

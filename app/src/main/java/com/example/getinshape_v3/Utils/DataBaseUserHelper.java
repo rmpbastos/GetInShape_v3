@@ -71,7 +71,6 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
     }
 
 
-    // FOR THE HOME FRAGMENT - LOAD WHEN USER ALREADY EXISTS
     public Cursor getUserAge(String email) {
         db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_AGE FROM " + TABLE_NAME + " WHERE EMAIL =?",
@@ -113,4 +112,6 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
                 new String[]{String.valueOf(email)});
         return cursor;
     }
+
+
 }

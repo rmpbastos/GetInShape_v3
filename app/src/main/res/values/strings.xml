@@ -13,12 +13,12 @@
     <string name="gender">Gender:</string>
     <string name="gender_string">Select your gender</string>
 
-    <string name="_50g_of_cheese">50g of cheese</string>
+    <string name="_50g_of_cheese">100g of ground beef</string>
     <string name="search_food">Search</string>
-    <string name="food_name">Name:</string>
-    <string name="calories">Calories:</string>
-    <string name="serving_size_g">Serving size (g):</string>
-    <string name="date_added">Date added:</string>
+    <string name="food_name"></string>
+    <string name="calories"></string>
+    <string name="serving_size_g"></string>
+    <string name="date_added"></string>
     <string name="add_to_diary">Add to Diary</string>
 
     <string name="your_target">Your Target:</string>
