@@ -17,7 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
             android:layout_marginTop="220dp"
-            android:text="@string/age"
+            android:text=""
+            android:drawableLeft="@drawable/baseline_cake_24"
+            android:drawablePadding="8dp"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -28,10 +30,12 @@
             android:id="@+id/age_editText"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:autofillHints=""
             android:ems="10"
+            android:hint="@string/age"
             android:inputType="number"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/age_label"
             app:layout_constraintStart_toEndOf="@+id/age_label"
             app:layout_constraintTop_toTopOf="@+id/age_label"
@@ -41,8 +45,10 @@
             android:id="@+id/height_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/height_cm"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/baseline_height_24"
+            android:drawablePadding="8dp"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -51,12 +57,14 @@
 
         <EditText
             android:id="@+id/height_editText"
-            android:layout_width="60dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:autofillHints=""
             android:ems="10"
+            android:hint="@string/height_cm"
             android:inputType="number"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/height_label"
             app:layout_constraintStart_toEndOf="@+id/height_label"
             app:layout_constraintTop_toTopOf="@+id/height_label"
@@ -66,8 +74,10 @@
             android:id="@+id/weight_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/weight_kg"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/baseline_monitor_weight_24"
+            android:drawablePadding="8dp"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -76,12 +86,14 @@
 
         <EditText
             android:id="@+id/weight_editText"
-            android:layout_width="60dp"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:autofillHints=""
             android:ems="10"
+            android:hint="@string/weight_kg"
             android:inputType="numberDecimal"
+            android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="@+id/weight_label"
             app:layout_constraintStart_toEndOf="@+id/weight_label"
             app:layout_constraintTop_toTopOf="@+id/weight_label"
@@ -91,8 +103,10 @@
             android:id="@+id/gender_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/gender"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/baseline_wc_24"
+            android:drawablePadding="8dp"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -101,9 +115,9 @@
 
         <Spinner
             android:id="@+id/gender_spinner"
-            android:layout_width="150dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:entries="@array/txtGender"
             app:layout_constraintBottom_toBottomOf="@+id/gender_label"
             app:layout_constraintStart_toEndOf="@+id/gender_label"
@@ -114,8 +128,10 @@
             android:id="@+id/activity_level_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/activity_level"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/baseline_fitness_center_24"
+            android:drawablePadding="8dp"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -124,9 +140,9 @@
 
         <Spinner
             android:id="@+id/activity_level_spinner"
-            android:layout_width="150dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:entries="@array/txtActivityLevel"
             app:layout_constraintBottom_toBottomOf="@+id/activity_level_label"
             app:layout_constraintStart_toEndOf="@+id/activity_level_label"
@@ -137,8 +153,10 @@
             android:id="@+id/objective_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/objective"
+            android:layout_marginTop="20dp"
+            android:drawableLeft="@drawable/baseline_gps_fixed_24"
+            android:drawablePadding="8dp"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -149,7 +167,7 @@
             android:id="@+id/objective_spinner"
             android:layout_width="180dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="20dp"
             android:entries="@array/txtObjective"
             app:layout_constraintBottom_toBottomOf="@+id/objective_label"
             app:layout_constraintStart_toEndOf="@+id/objective_label"
@@ -204,31 +222,45 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="1.0" />
 
-        <TextView
-            android:id="@+id/home_bmi"
-            android:layout_width="wrap_content"
+        <androidx.cardview.widget.CardView
+            android:layout_width="300dp"
             android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/complementary_blue"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toTopOf="@+id/age_label"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="5dp"
+
+            app:layout_constraintBottom_toTopOf="@+id/age_editText"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.169"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_title"
-            app:layout_constraintVertical_bias="0.47" />
+            app:layout_constraintTop_toBottomOf="@+id/home_title">
 
-        <TextView
-            android:id="@+id/home_bmi_message"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=""
-            android:textColor="@color/complementary_blue"
-            android:textSize="12sp"
-            app:layout_constraintStart_toStartOf="@+id/home_bmi"
-            app:layout_constraintTop_toBottomOf="@+id/home_bmi" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:padding="8dp"
+                android:background="@color/blue_gray_900">
 
+                <TextView
+                    android:id="@+id/home_bmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/home_bmi_str"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/home_bmi_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/home_bmi_message_str"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

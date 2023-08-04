@@ -159,33 +159,32 @@ public class HomeFragment extends Fragment {
                 }
 
                 userGender = genderSpinner.getSelectedItem().toString();
-                if(genderSpinner.getSelectedItemPosition() == 0) {
+                if (genderSpinner.getSelectedItemPosition() == 1) {
                     userGender = "Female";
-                }
-                else {
+                } else {
                     userGender = "Male";
                 }
 
                 userActivityLevel = activityLevelSpinner.getSelectedItem().toString();
-                if(activityLevelSpinner.getSelectedItemPosition() == 0) {
+                if(activityLevelSpinner.getSelectedItemPosition() == 1) {
                     userActivityLevel = "Sedentary";
-                } else if (activityLevelSpinner.getSelectedItemPosition() == 1) {
-                    userActivityLevel = "Lightly Active";
                 } else if (activityLevelSpinner.getSelectedItemPosition() == 2) {
-                    userActivityLevel = "Moderately Active";
+                    userActivityLevel = "Lightly Active";
                 } else if (activityLevelSpinner.getSelectedItemPosition() == 3) {
-                    userActivityLevel = "Very Active";
+                    userActivityLevel = "Moderately Active";
                 } else if (activityLevelSpinner.getSelectedItemPosition() == 4) {
+                    userActivityLevel = "Very Active";
+                } else if (activityLevelSpinner.getSelectedItemPosition() == 5) {
                     userActivityLevel = "Extremely Active";
                 }
 
                 userObjective = objectiveSpinner.getSelectedItem().toString();
-                if(objectiveSpinner.getSelectedItemPosition() == 0) {
-                    userObjective = "Maintain";
-                } else if(objectiveSpinner.getSelectedItemPosition() == 1) {
-                    userObjective = "Lose";
-                } else if (objectiveSpinner.getSelectedItemPosition() == 2) {
-                    userObjective = "Gain";
+                if(objectiveSpinner.getSelectedItemPosition() == 1) {
+                    userObjective = "Maintain Weight";
+                } else if(objectiveSpinner.getSelectedItemPosition() == 2) {
+                    userObjective = "Lose Weight";
+                } else if (objectiveSpinner.getSelectedItemPosition() == 3) {
+                    userObjective = "Gain Weight";
                 }
 
                 calculateRecommendedCalorieIntake();
@@ -194,17 +193,20 @@ public class HomeFragment extends Fragment {
                 millis = System.currentTimeMillis();
 
 
-                //Insert user details into the database
-                Boolean checkInsertData = dataBaseUserHelper.insertUserDetails(millis, currentUserEmail, userAge, userHeight,
-                        userWeight, userGender, userActivityLevel, userObjective, recommendedCalorieIntake, bmi);
-                if (checkInsertData == true) {
-                    Toast.makeText(getActivity().getApplicationContext(), "New entry inserted!", Toast.LENGTH_SHORT).show();
+                //Insert user details into the database and move to the search tab
+                if (genderSpinner.getSelectedItemPosition() == 0 || activityLevelSpinner.getSelectedItemPosition() == 0 ||
+                        objectiveSpinner.getSelectedItemPosition() == 0) {
+                    Toast.makeText(getActivity().getApplicationContext(), "Please fill all the fields above", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_SHORT).show();
+                    Boolean checkInsertData = dataBaseUserHelper.insertUserDetails(millis, currentUserEmail, userAge, userHeight,
+                            userWeight, userGender, userActivityLevel, userObjective, recommendedCalorieIntake, bmi);
+                    if (checkInsertData == true) {
+                        Toast.makeText(getActivity().getApplicationContext(), "New entry inserted!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(getActivity().getApplicationContext(), "Sorry, entry not inserted.", Toast.LENGTH_SHORT).show();
+                    }
+                    openSearchFragment();
                 }
-
-                openSearchFragment();
-
             }
         });
     }

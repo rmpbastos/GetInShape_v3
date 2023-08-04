@@ -12,4 +12,6 @@
     <color name="mustard">#FBBB01</color>
     <color name="complementary_blue">#0019D8</color>
     <color name="analogous_red">#ED3800</color>
+    <color name="blue_gray_900">#263238</color>
+    <color name="gray_200">#EEEEEE</color>
 </resources>

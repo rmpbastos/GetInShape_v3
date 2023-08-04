@@ -5,12 +5,12 @@
 
     <string name="home_title">Please enter you details</string>
     <string name="search_title">Search your food here</string>
-    <string name="age">Age:</string>
-    <string name="height_cm">Height (cm):</string>
-    <string name="objective">Objective:</string>
-    <string name="activity_level">Activity Level:</string>
-    <string name="weight_kg">Weight (kg):</string>
-    <string name="gender">Gender:</string>
+    <string name="age">Age</string>
+    <string name="height_cm">Height (cm)</string>
+    <string name="objective">Objective</string>
+    <string name="activity_level">Activity Level</string>
+    <string name="weight_kg">Weight (kg)</string>
+    <string name="gender">Gender</string>
     <string name="gender_string">Select your gender</string>
 
     <string name="_50g_of_cheese">100g of ground beef</string>
@@ -25,12 +25,17 @@
     <string name="consumed">Consumed:</string>
     <string name="remaining">Remaining:</string>
 
+    <string name="home_bmi_str">Keep you BMI between 18.5 and 24.9</string>
+    <string name="home_bmi_message_str">Your Body Mass Index (BMI) will be calculated once you enter your information below</string>
+
     <string-array name="txtGender">
+        <item>Gender:</item>
         <item>Female</item>
         <item>Male</item>
     </string-array>
 
     <string-array name="txtActivityLevel">
+        <item>Activity Level:</item>
         <item>Sedentary</item>
         <item>Lightly Active</item>
         <item>Moderately Active</item>
@@ -39,6 +44,7 @@
     </string-array>
 
     <string-array name="txtObjective">
+        <item>Objective:</item>
         <item>Maintain Weight</item>
         <item>Lose Weight</item>
         <item>Gain Weight</item>
