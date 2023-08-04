@@ -4,12 +4,14 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Canvas;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,6 +21,8 @@ import com.example.getinshape_v3.Utils.DataBaseFoodHelper;
 import com.example.getinshape_v3.Utils.DataBaseUserHelper;
 
 import java.util.ArrayList;
+
+import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator;
 
 public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
 
@@ -128,7 +132,15 @@ public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
         }
     }
 
+    @Override
+    public void onChildDraw(@NonNull Canvas c, @NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, float dX, float dY, int actionState, boolean isCurrentlyActive) {
 
+        new RecyclerViewSwipeDecorator.Builder(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive)
+                .addSwipeRightBackgroundColor(ContextCompat.getColor(context, R.color.analogous_red))
+                .addSwipeRightActionIcon(R.drawable.baseline_delete_24_white)
+                .create()
+                .decorate();
 
-
+        super.onChildDraw(c, recyclerView, viewHolder, dX, dY, actionState, isCurrentlyActive);
+    }
 }

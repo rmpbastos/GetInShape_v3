@@ -10,5 +10,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="semiTransparentColor">#70FFFFFF</color>
     <color name="mustard">#FBBB01</color>
-    <color name="complementary">#013FFB</color>
+    <color name="complementary_blue">#013FFB</color>
+    <color name="analogous_red">#ED3800</color>
 </resources>

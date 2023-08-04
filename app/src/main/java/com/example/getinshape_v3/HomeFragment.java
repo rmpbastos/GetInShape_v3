@@ -18,15 +18,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.getinshape_v3.Utils.DataBaseUserHelper;
+
+import java.text.SimpleDateFormat;
 
 public class HomeFragment extends Fragment {
 
     private EditText ageEditText, heightEditText, weightEditText;
     private Spinner genderSpinner, activityLevelSpinner, objectiveSpinner;
     private Button saveButton;
+
+    private TextView homeTitle;
 
     String userGender, userActivityLevel, userObjective;
     int userAge, userHeight;
@@ -35,8 +40,7 @@ public class HomeFragment extends Fragment {
     //Total Daily Energy Expenditure
     double tdee;
 
-    //Recommended calorie intake
-    double recommendedCalorieIntake;
+    double recommendedCalorieIntake, bmi;
 
     String currentUserEmail;
 
@@ -45,6 +49,9 @@ public class HomeFragment extends Fragment {
     int currentUserAge, currentUserHeight;
     double currentUserWeight;
     String currentUserGender, currentUserActivityLevel, currentUserObjective;
+
+    long millis;
+    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -71,18 +78,21 @@ public class HomeFragment extends Fragment {
         activityLevelSpinner = (Spinner) getView().findViewById(R.id.activity_level_spinner);
         objectiveSpinner = (Spinner) getView().findViewById(R.id.objective_spinner);
         saveButton = (Button) getView().findViewById(R.id.save_button);
+        homeTitle = (TextView) getView().findViewById(R.id.home_title);
 
 
         // Load the user information if it exists
         try {
             currentUserAge = getUserAge(currentUserEmail);
             if (currentUserAge > 0) {
+
                 currentUserHeight = getUserHeight(currentUserEmail);
                 currentUserWeight = getUserWeight(currentUserEmail);
                 currentUserGender = getUserGender(currentUserEmail);
                 currentUserActivityLevel = getUserActivityLevel(currentUserEmail);
                 currentUserObjective = getUserObjective(currentUserEmail);
 
+                homeTitle.setText("Here is your current information");
                 ageEditText.setText(String.valueOf(currentUserAge));
                 heightEditText.setText(String.valueOf(currentUserHeight));
                 weightEditText.setText(String.valueOf(currentUserWeight));
@@ -158,10 +168,14 @@ public class HomeFragment extends Fragment {
                 }
 
                 calculateRecommendedCalorieIntake();
+                calculateBmi();
+
+                millis = System.currentTimeMillis();
+
 
                 //Insert user details into the database
-                Boolean checkInsertData = dataBaseUserHelper.insertUserDetails(currentUserEmail, userAge, userHeight,
-                        userWeight, userGender, userActivityLevel, userObjective, recommendedCalorieIntake);
+                Boolean checkInsertData = dataBaseUserHelper.insertUserDetails(millis, currentUserEmail, userAge, userHeight,
+                        userWeight, userGender, userActivityLevel, userObjective, recommendedCalorieIntake, bmi);
                 if (checkInsertData == true) {
                     Toast.makeText(getActivity().getApplicationContext(), "New entry inserted!", Toast.LENGTH_SHORT).show();
                 } else {
@@ -254,6 +268,10 @@ public class HomeFragment extends Fragment {
         } else {
             recommendedCalorieIntake = tdee * 1.15;
         }
+    }
+
+    public void calculateBmi() {
+        bmi = userWeight * ((userHeight) ^ 2);
     }
 
     public void openSearchFragment() {

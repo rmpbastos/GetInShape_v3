@@ -13,6 +13,8 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "UserData.db";
     public static final String TABLE_NAME = "userDetails";
 
+    SQLiteDatabase db;
+
 
     public DataBaseUserHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -20,9 +22,9 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE " + TABLE_NAME + "(EMAIL TEXT, USER_AGE INTEGER, USER_HEIGHT INTEGER," +
-                "USER_WEIGHT REAL, USER_GENDER TEXT,USER_ACTIVITY_LEVEL TEXT, USER_OBJECTIVE TEXT," +
-                "RECOMMENDED_CALORIE_INTAKE REAL)");
+        db.execSQL("CREATE TABLE " + TABLE_NAME + "(LOCAL_DATE_TIME INTEGER PRIMARY KEY, EMAIL TEXT, " +
+                "USER_AGE INTEGER, USER_HEIGHT INTEGER, USER_WEIGHT REAL, USER_GENDER TEXT,USER_ACTIVITY_LEVEL TEXT, " +
+                "USER_OBJECTIVE TEXT, RECOMMENDED_CALORIE_INTAKE REAL, BMI REAL)");
     }
 
     @Override
@@ -31,10 +33,11 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
     }
 
     //Insert data to table
-    public Boolean insertUserDetails(String email, int age, int height, double weight, String gender,
-                                     String activityLevel, String objective, double recommendedCalorieIntake) {
-        SQLiteDatabase db = this.getWritableDatabase();
+    public Boolean insertUserDetails(long timestamp, String email, int age, int height, double weight, String gender,
+                                     String activityLevel, String objective, double recommendedCalorieIntake, double bmi) {
+        db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
+        contentValues.put("LOCAL_DATE_TIME", timestamp);
         contentValues.put("EMAIL", email);
         contentValues.put("USER_AGE", age);
         contentValues.put("USER_HEIGHT", height);
@@ -43,6 +46,7 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
         contentValues.put("USER_ACTIVITY_LEVEL", activityLevel);
         contentValues.put("USER_OBJECTIVE", objective);
         contentValues.put("RECOMMENDED_CALORIE_INTAKE", recommendedCalorieIntake);
+        contentValues.put("BMI", bmi);
         long result = db.insert(TABLE_NAME, null, contentValues);
 
         if (result == -1) {
@@ -53,8 +57,15 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
     }
 
     public Cursor getUserRecommendedIntake(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT RECOMMENDED_CALORIE_INTAKE FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
+        return cursor;
+    }
+
+    public Cursor getUserBmi(String email) {
+        db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT BMI FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
     }
@@ -62,42 +73,42 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
 
     // FOR THE HOME FRAGMENT - LOAD WHEN USER ALREADY EXISTS
     public Cursor getUserAge(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_AGE FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
     }
 
     public Cursor getUserHeight(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_HEIGHT FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
     }
 
     public Cursor getUserWeight(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_WEIGHT FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
     }
 
     public Cursor getUserGender(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_GENDER FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
     }
 
     public Cursor getUserActivityLevel(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_ACTIVITY_LEVEL FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
     }
 
     public Cursor getUserObjective(String email) {
-        SQLiteDatabase db = this.getWritableDatabase();
+        db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery("SELECT USER_OBJECTIVE FROM " + TABLE_NAME + " WHERE EMAIL =?",
                 new String[]{String.valueOf(email)});
         return cursor;
