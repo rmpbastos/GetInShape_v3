@@ -13,11 +13,6 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "UserData.db";
     public static final String TABLE_NAME = "userDetails";
 
-//    DataBaseLoginHelper dataBaseLoginHelper;
-
-    //TODO: DELETE AFTER TESTS - HARDCODED VARIABLE
-//    String currentUserEmail = "rafabastos@email.com";
-
 
     public DataBaseUserHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -57,16 +52,10 @@ public class DataBaseUserHelper extends SQLiteOpenHelper {
         }
     }
 
-    // TODO: 'WHERE EMAIL =?'
-//    public Cursor getUserRecommendedIntake(String email) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT RECOMMENDED_CALORIE_INTAKE FROM " + TABLE_NAME, null);
-//        return cursor;
-//    }
-
-    public Cursor getUserRecommendedIntake() {
+    public Cursor getUserRecommendedIntake(String email) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT RECOMMENDED_CALORIE_INTAKE FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT RECOMMENDED_CALORIE_INTAKE FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
         return cursor;
     }
 }

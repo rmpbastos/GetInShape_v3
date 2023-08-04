@@ -14,16 +14,23 @@ import com.example.getinshape_v3.MainActivity;
 import com.example.getinshape_v3.R;
 import com.example.getinshape_v3.Utils.DataBaseFoodHelper;
 
+import org.apache.commons.lang3.StringUtils;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> {
 
     private ArrayList<FoodModel> mList = new ArrayList<>();
 
-    ArrayList<FoodModel> data;
     private MainActivity activity;
     private DataBaseFoodHelper dataBaseFoodHelper;
+
+    long millis;
+
+    SimpleDateFormat sdf = new SimpleDateFormat("hh:mm a");
 
     Context context;
 
@@ -42,10 +49,12 @@ public class FoodAdapter extends RecyclerView.Adapter<FoodAdapter.MyViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         final FoodModel item = mList.get(position);
-        holder.foodName.setText(item.getFoodName());
-        holder.foodServing.setText(String.valueOf(item.getServingSize()));
-        holder.foodCalories.setText(String.valueOf(item.getCalories()));
-        holder.foodTimestamp.setText(String.valueOf(item.getLocalDateTime()));
+        holder.foodName.setText(StringUtils.capitalize(item.getFoodName().replace("\"", "")));
+        holder.foodServing.setText(String.valueOf(item.getServingSize()) + " g");
+        holder.foodCalories.setText(String.valueOf(item.getCalories()) + " kcal");
+        millis = item.getLocalDateTime();
+        Date resultDate = new Date(millis);
+        holder.foodTimestamp.setText(String.valueOf(sdf.format(resultDate)));
     }
 
     public Context getContext() {

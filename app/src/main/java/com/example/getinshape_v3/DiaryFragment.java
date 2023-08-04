@@ -1,6 +1,7 @@
 package com.example.getinshape_v3;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -48,6 +49,11 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        Intent intent = getActivity().getIntent();
+        Bundle b = intent.getExtras();
+
+        currentUserEmail = b.getString("currentUserEmail");
+
 
         // THIS CHUNK OF CODE BELOW IS WORKING
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -56,7 +62,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         mList = new ArrayList<>();
         foodAdapter = new FoodAdapter(dataBaseFoodHelper,  getActivity());
 
-        mList = dataBaseFoodHelper.getAllFood();
+        mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
         foodAdapter.setFood(mList);
 
         mRecyclerView.setHasFixedSize(true);
@@ -72,9 +78,9 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         try {
 
 
-            loadCalorieIntake();
+            loadCalorieIntake(currentUserEmail);
 
-            loadRecommendedIntake();
+            loadRecommendedIntake(currentUserEmail);
 
             double calories_remaining = Double.parseDouble(calorie_target_str) - Double.parseDouble(calories_eaten_str);
             String calories_remaining_str = String.format("%.2f", calories_remaining);
@@ -86,19 +92,20 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
 
     }
 
-    private void loadCalorieIntake() {
+    private void loadCalorieIntake(String email) {
         //Retrieve the data from the database
-        Cursor result = dataBaseFoodHelper.getCalorieIntake();
+        Cursor result = dataBaseFoodHelper.getCalorieIntake(email);
 
         while (result.moveToNext()) {
-            calories_eaten_todayTV.setText(result.getString(0));
             calories_eaten_str = result.getString(0);
+            calories_eaten_todayTV.setText(String.format("%.2f", Double.parseDouble(calories_eaten_str)));
+//            calories_eaten_todayTV.setText(result.getString(0));
         }
     }
 
-    private void loadRecommendedIntake() {
+    private void loadRecommendedIntake(String email) {
         //Retrieve the data from the database
-        Cursor result = dataBaseUserHelper.getUserRecommendedIntake();
+        Cursor result = dataBaseUserHelper.getUserRecommendedIntake(email);
 
         while (result.moveToNext()) {
             calorie_targetTV.setText(result.getString(0));
@@ -108,7 +115,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
 
     @Override
     public void onDialogClose(DialogInterface dialogInterface) {
-        mList = dataBaseFoodHelper.getAllFood();
+        mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
         foodAdapter.setFood(mList);
         foodAdapter.notifyDataSetChanged();
     }

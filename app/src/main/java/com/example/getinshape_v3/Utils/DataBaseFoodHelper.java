@@ -66,14 +66,15 @@ public class DataBaseFoodHelper extends SQLiteOpenHelper {
     }
 
     //Get all food to be used by the recycler view
-    public ArrayList<FoodModel> getAllFood() {
+    public ArrayList<FoodModel> getAllFood(String email) {
         db = this.getWritableDatabase();
         Cursor cursor = null;
         ArrayList<FoodModel> modelList = new ArrayList<>();
 
         db.beginTransaction();
         try {
-            cursor = db.query(TABLE_NAME, null, null, null, null, null, null);
+            cursor = db.query(TABLE_NAME, null, "EMAIL =?", new String[]{String.valueOf(email)},
+                    null, null, null, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     do {
@@ -96,32 +97,18 @@ public class DataBaseFoodHelper extends SQLiteOpenHelper {
         return modelList;
     }
 
-
-
-
-    // TODO: 'WHERE EMAIL =?'
-//    public Cursor getUserFoodData(String email) {
-//        db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
-//        return cursor;
-//    }
-
-    public Cursor getUserFoodData() {
+    public Cursor getUserFoodData(String email) {
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
         return cursor;
     }
 
-    // TODO: 'WHERE EMAIL =?'
-//    public Cursor getCalorieIntake(String email) {
-//        db = this.getWritableDatabase();
-//        Cursor cursor = db.rawQuery("SELECT SUM(CALORIES) FROM " + TABLE_NAME, null);
-//        return cursor;
-//    }
 
-    public Cursor getCalorieIntake() {
+    public Cursor getCalorieIntake(String email) {
         db = this.getWritableDatabase();
-        Cursor cursor = db.rawQuery("SELECT SUM(CALORIES) FROM " + TABLE_NAME, null);
+        Cursor cursor = db.rawQuery("SELECT SUM(CALORIES) FROM " + TABLE_NAME + " WHERE EMAIL =?",
+                new String[]{String.valueOf(email)});
         return cursor;
     }
 }
