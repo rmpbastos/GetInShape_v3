@@ -93,9 +93,10 @@ public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
                 if(itemCount <= 0) {
                     calories_eaten_str = "0";
                     calories_eaten_todayTV.setText(String.format("%.2f", Double.parseDouble(calories_eaten_str)));
-                    double calories_remaining = Double.parseDouble(calorie_target_str) - Double.parseDouble(calories_eaten_str);
-                    String calories_remaining_str = String.format("%.2f", calories_remaining);
-                    calories_remainingTV.setText(calories_remaining_str);
+
+                    loadRecommendedIntake(currentUserEmail);
+
+                    calories_remainingTV.setText(calorie_target_str);
                 }
 
             }

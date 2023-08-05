@@ -72,7 +72,9 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         context = requireContext();
         foodAdapter = new FoodAdapter(dataBaseFoodHelper, context);
 
-        mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
+        //Get all food from the current day
+        mList = dataBaseFoodHelper.getAllFoodFromCurrentDay(currentUserEmail);
+//        mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
         foodAdapter.setFood(mList);
 
         mRecyclerView.setHasFixedSize(true);
@@ -130,7 +132,9 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
 
     @Override
     public void onDialogClose(DialogInterface dialogInterface) {
-        mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
+        //Get all food from current day
+        mList = dataBaseFoodHelper.getAllFoodFromCurrentDay(currentUserEmail);
+//        mList = dataBaseFoodHelper.getAllFood(currentUserEmail);
         foodAdapter.setFood(mList);
         foodAdapter.notifyDataSetChanged();
     }

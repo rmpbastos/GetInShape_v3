@@ -10,8 +10,12 @@ import androidx.annotation.Nullable;
 
 import com.example.getinshape_v3.FoodModel.FoodModel;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class DataBaseFoodHelper extends SQLiteOpenHelper {
 
@@ -75,6 +79,54 @@ public class DataBaseFoodHelper extends SQLiteOpenHelper {
         try {
             cursor = db.query(TABLE_NAME, null, "EMAIL =?", new String[]{String.valueOf(email)},
                     null, null, null, null);
+            if (cursor != null) {
+                if (cursor.moveToFirst()) {
+                    do {
+
+                        FoodModel food = new FoodModel();
+                        food.setLocalDateTime(cursor.getLong(cursor.getColumnIndexOrThrow("LOCAL_DATE_TIME")));
+                        food.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("EMAIL")));
+                        food.setFoodName(cursor.getString(cursor.getColumnIndexOrThrow("FOOD_NAME")));
+                        food.setServingSize(cursor.getDouble(cursor.getColumnIndexOrThrow("SERVING_SIZE_G")));
+                        food.setCalories(cursor.getDouble(cursor.getColumnIndexOrThrow("CALORIES")));
+                        modelList.add(food);
+
+                    } while (cursor.moveToNext());
+                }
+            }
+        } finally {
+            db.endTransaction();
+            cursor.close();
+        }
+        return modelList;
+    }
+
+    //Get all food to be used by the recycler view - Only for the current day
+    public ArrayList<FoodModel> getAllFoodFromCurrentDay(String email) {
+//        db = this.getWritableDatabase();
+        db = this.getReadableDatabase();
+        Cursor cursor = null;
+        ArrayList<FoodModel> modelList = new ArrayList<>();
+
+        //Current date in milliseconds
+        long currentMillis = System.currentTimeMillis();
+
+        // Calculate the start and end time of the current day in milliseconds
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(currentMillis);
+        calendar.set(Calendar.HOUR_OF_DAY, 0);
+        calendar.set(Calendar.MINUTE, 0);
+        calendar.set(Calendar.SECOND, 0);
+        long startOfDayMillis = calendar.getTimeInMillis();
+        calendar.set(Calendar.HOUR_OF_DAY, 23);
+        calendar.set(Calendar.MINUTE, 59);
+        calendar.set(Calendar.SECOND, 59);
+        long endOfDayMillis = calendar.getTimeInMillis();
+
+        db.beginTransaction();
+        try {
+            cursor = db.query(TABLE_NAME, null, "LOCAL_DATE_TIME >= ? AND LOCAL_DATE_TIME <= ? AND EMAIL = ?",
+                    new String[]{String.valueOf(startOfDayMillis), String.valueOf(endOfDayMillis), String.valueOf(email)}, null, null, null);
             if (cursor != null) {
                 if (cursor.moveToFirst()) {
                     do {
