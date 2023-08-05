@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -30,8 +31,8 @@ public class HomeFragment extends Fragment {
     private EditText ageEditText, heightEditText, weightEditText;
     private Spinner genderSpinner, activityLevelSpinner, objectiveSpinner;
     private Button saveButton;
-
     private TextView homeTitle, homeGreeting, homeBmi, homeBmiMessage;
+    private ImageButton logoutButton;
 
     String userGender, userActivityLevel, userObjective, greeting;
     int userAge, userHeight;
@@ -80,6 +81,7 @@ public class HomeFragment extends Fragment {
         homeGreeting = (TextView) getView().findViewById(R.id.home_greeting);
         homeBmi = (TextView) getView().findViewById(R.id.home_bmi);
         homeBmiMessage = (TextView) getView().findViewById(R.id.home_bmi_message);
+        logoutButton = (ImageButton) getView().findViewById(R.id.logout_button);
 
         // Load the user information if it exists
         try {
@@ -207,6 +209,17 @@ public class HomeFragment extends Fragment {
                     }
                     openSearchFragment();
                 }
+            }
+        });
+
+        //Logout button
+        logoutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                currentUserEmail = "";
+                Intent intent1 = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent1);
+                Toast.makeText(getActivity().getApplicationContext(), "See you soon!", Toast.LENGTH_SHORT).show();
             }
         });
     }

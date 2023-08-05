@@ -69,7 +69,6 @@ public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
                 adapter.deleteFood(position);
 
 
-
                 dataBaseFoodHelper = new DataBaseFoodHelper(context);
                 dataBaseUserHelper = new DataBaseUserHelper(context);
 
@@ -90,7 +89,7 @@ public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
 
                 //Update the consumed calorie count to zero when there is no more cards left in the recycler view
                 itemCount = adapter.getItemCount();
-                if(itemCount <= 0) {
+                if (itemCount <= 0) {
                     calories_eaten_str = "0";
                     calories_eaten_todayTV.setText(String.format("%.2f", Double.parseDouble(calories_eaten_str)));
 
