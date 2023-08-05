@@ -103,7 +103,6 @@ public class SearchFragment extends Fragment {
 
             }
         });
-
     }
 
     public void fetchFood(String query) {

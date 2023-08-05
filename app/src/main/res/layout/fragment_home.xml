@@ -17,9 +17,9 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
             android:layout_marginTop="220dp"
-            android:text=""
             android:drawableLeft="@drawable/baseline_cake_24"
             android:drawablePadding="8dp"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
@@ -28,6 +28,7 @@
 
         <EditText
             android:id="@+id/age_editText"
+            style="@style/CustomCursorStyle"
             android:layout_width="60dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -36,6 +37,8 @@
             android:hint="@string/age"
             android:inputType="number"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/EditTextTheme"
             app:layout_constraintBottom_toBottomOf="@+id/age_label"
             app:layout_constraintStart_toEndOf="@+id/age_label"
             app:layout_constraintTop_toTopOf="@+id/age_label"
@@ -57,6 +60,7 @@
 
         <EditText
             android:id="@+id/height_editText"
+            style="@style/CustomCursorStyle"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -65,6 +69,8 @@
             android:hint="@string/height_cm"
             android:inputType="number"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/EditTextTheme"
             app:layout_constraintBottom_toBottomOf="@+id/height_label"
             app:layout_constraintStart_toEndOf="@+id/height_label"
             app:layout_constraintTop_toTopOf="@+id/height_label"
@@ -86,6 +92,7 @@
 
         <EditText
             android:id="@+id/weight_editText"
+            style="@style/CustomCursorStyle"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
@@ -94,6 +101,8 @@
             android:hint="@string/weight_kg"
             android:inputType="numberDecimal"
             android:textSize="16sp"
+            android:textStyle="bold"
+            android:theme="@style/EditTextTheme"
             app:layout_constraintBottom_toBottomOf="@+id/weight_label"
             app:layout_constraintStart_toEndOf="@+id/weight_label"
             app:layout_constraintTop_toTopOf="@+id/weight_label"
@@ -236,9 +245,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@color/blue_gray_900"
                 android:orientation="vertical"
-                android:padding="8dp"
-                android:background="@color/blue_gray_900">
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/home_bmi"

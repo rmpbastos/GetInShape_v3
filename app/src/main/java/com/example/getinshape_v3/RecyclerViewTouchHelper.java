@@ -30,7 +30,7 @@ public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
 
     private TextView calorie_targetTV, calories_eaten_todayTV, calories_remainingTV;
 
-    private String currentUserEmail, calorie_target_str, calories_eaten_str;
+    private String currentUserEmail, calorie_target_str, calories_eaten_str, calories_remaining_str;
 
     int itemCount;
 
@@ -98,6 +98,15 @@ public class RecyclerViewTouchHelper extends ItemTouchHelper.SimpleCallback {
 
                     calories_remainingTV.setText(calorie_target_str);
                 }
+
+                calories_remaining_str = calories_remainingTV.getText().toString();
+                //Change the text color of the remaining calories if it is < 0
+                if (Double.parseDouble(calories_remaining_str) < 0) {
+                    calories_remainingTV.setTextColor(context.getResources().getColor(R.color.analogous_red));
+                } else {
+                    calories_remainingTV.setTextColor(context.getResources().getColor(R.color.complementary_blue));
+                }
+
 
             }
         });

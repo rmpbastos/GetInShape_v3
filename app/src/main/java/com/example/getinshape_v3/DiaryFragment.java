@@ -105,6 +105,14 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
             double calories_remaining = Double.parseDouble(calorie_target_str) - Double.parseDouble(calories_eaten_str);
             String calories_remaining_str = String.format("%.2f", calories_remaining);
             calories_remainingTV.setText(calories_remaining_str);
+
+            //Change the text color of the remaining calories if it is < 0
+            if (calories_remaining < 0) {
+                calories_remainingTV.setTextColor(getResources().getColor(R.color.analogous_red));
+            } else {
+                calories_remainingTV.setTextColor(getResources().getColor(R.color.complementary_blue));
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
             Toast.makeText(getActivity().getApplicationContext(), "Oops, your diary is empty!", Toast.LENGTH_LONG).show();

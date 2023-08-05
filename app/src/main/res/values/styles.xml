@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="CustomCursorStyle">
+        <item name="android:textCursorDrawable">@drawable/custom_cursor</item>
+    </style>
+
+    <style name="EditTextTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/black</item>
+        <item name="colorControlActivated">@color/analogous_red</item>
+        <item name="colorControlHighlight">@color/analogous_red</item>
+    </style>
+</resources>
