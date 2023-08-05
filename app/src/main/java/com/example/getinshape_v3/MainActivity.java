@@ -45,6 +45,17 @@ public class MainActivity extends AppCompatActivity implements
             }
             return true;
         });
+
+        // Handle the icon focus change when fragments switch
+        // Add the OnBackStackChangedListener to keep track of fragment changes
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            int backStackEntryCount = getSupportFragmentManager().getBackStackEntryCount();
+            if (backStackEntryCount > 0) {
+                String topFragmentTag = getSupportFragmentManager().getBackStackEntryAt(backStackEntryCount - 1).getName();
+                switchSelectedIcon(topFragmentTag);
+            }
+        });
+
     }
 
     @Override
@@ -53,18 +64,34 @@ public class MainActivity extends AppCompatActivity implements
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment);
         fragmentTransaction.setReorderingAllowed(true);
-        fragmentTransaction.addToBackStack(null);
+
+//        fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.addToBackStack(fragment.getClass().getName()); // Set the fragment tag in the back stack
         fragmentTransaction.commit();
     }
 
-//    public void replaceFragment(Fragment fragment) {
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//        fragmentTransaction.replace(R.id.frame_layout, fragment);
-//        fragmentTransaction.setReorderingAllowed(true);
-//        fragmentTransaction.addToBackStack(null);
-//        fragmentTransaction.commit();
-//    }
+    // Handle the icon focus change when fragments switch
+    private void switchSelectedIcon(String tag) {
+        if (tag != null) {
+            int itemId = R.id.home; // Default selected icon
+            switch (tag) {
+                case "com.example.getinshape_v3.HomeFragment":
+                    itemId = R.id.home;
+                    break;
+                case "com.example.getinshape_v3.SearchFragment":
+                    itemId = R.id.search;
+                    break;
+                case "com.example.getinshape_v3.DiaryFragment":
+                    itemId = R.id.diary;
+                    break;
+            }
+
+            // Check if the selected item is already the same as the one to be selected
+            if (binding.bottomNavigationView.getSelectedItemId() != itemId) {
+                binding.bottomNavigationView.setSelectedItemId(itemId);
+            }
+        }
+    }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
