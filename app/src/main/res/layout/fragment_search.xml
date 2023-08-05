@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bg"
-            android:drawableLeft="@drawable/baseline_search_24_white"
+            android:drawableStart="@drawable/baseline_search_24_white"
             android:drawablePadding="8dp"
             android:text="@string/search_food"
             android:textColor="@color/white"
@@ -62,13 +62,13 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
-            android:drawableRight="@drawable/baseline_restaurant_24"
-            android:text="@string/food_name"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toTopOf="@+id/guideline2" />
+            app:layout_constraintTop_toTopOf="@+id/guideline2"
+            app:drawableRightCompat="@drawable/baseline_restaurant_24" />
 
         <TextView
             android:id="@+id/textView2"
@@ -76,14 +76,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:drawableRight="@drawable/baseline_local_fire_department_24"
-            android:drawableTint="@color/analogous_red"
-            android:text="@string/calories"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textView4" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            app:drawableRightCompat="@drawable/baseline_local_fire_department_24"
+            app:drawableTint="@color/analogous_red" />
 
         <TextView
             android:id="@+id/calorie_textView"
@@ -116,14 +116,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="24dp"
-            android:drawableRight="@drawable/baseline_scale_24_small"
-            android:drawableTint="@color/complementary_blue"
-            android:text="@string/serving_size_g"
+            android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toStartOf="@+id/guideline"
-            app:layout_constraintTop_toBottomOf="@+id/textView" />
+            app:layout_constraintTop_toBottomOf="@+id/textView"
+            app:drawableRightCompat="@drawable/baseline_scale_24_small"
+            app:drawableTint="@color/complementary_blue" />
 
         <TextView
             android:id="@+id/serving_size_textView"
@@ -150,7 +150,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/btn_bg"
-            android:drawableLeft="@drawable/baseline_add_to_photos_24"
+            android:drawableStart="@drawable/baseline_add_to_photos_24"
             android:drawablePadding="8dp"
             android:text="@string/add_to_diary"
             android:textColor="@color/white"

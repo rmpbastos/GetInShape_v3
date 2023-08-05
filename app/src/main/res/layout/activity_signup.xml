@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Join Get In Shape!"
+                android:text="@string/join_get_in_shape"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="36sp"
@@ -42,11 +42,14 @@
                 android:background="@drawable/black_border"
                 android:layout_marginTop="30dp"
                 android:padding="8dp"
-                android:hint="Email"
+                android:hint="@string/email_hint"
                 style="@style/CustomCursorStyle"
-                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawableStart="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:autofillHints=""
+                android:inputType="textEmailAddress"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -55,12 +58,14 @@
                 android:background="@drawable/black_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:hint="Password"
+                android:hint="@string/password_str"
                 android:inputType="textPassword"
                 style="@style/CustomCursorStyle"
-                android:drawableLeft="@drawable/baseline_lock_24"
+                android:drawableStart="@drawable/baseline_lock_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:autofillHints=""
+                tools:ignore="VisualLintTextFieldSize" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -69,27 +74,30 @@
                 android:background="@drawable/black_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:hint="Confirm Password"
+                android:hint="@string/confirm_password"
                 android:inputType="textPassword"
                 style="@style/CustomCursorStyle"
-                android:drawableLeft="@drawable/baseline_password_24"
+                android:drawableStart="@drawable/baseline_password_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:autofillHints=""
+                tools:ignore="VisualLintTextFieldSize" />
 
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Sign Up"
+                android:text="@string/sign_up"
                 android:id="@+id/signup_button"
                 android:textSize="18sp"
                 android:layout_marginTop="30dp"
-                app:cornerRadius="30dp" />
+                app:cornerRadius="30dp"
+                tools:ignore="VisualLintButtonSize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/loginRedirectText"
-                android:text="Already an user? Login"
+                android:text="@string/already_an_user_login"
                 android:layout_gravity="center"
                 android:padding="8dp"
                 android:layout_marginTop="8dp"

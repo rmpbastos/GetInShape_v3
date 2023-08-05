@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -25,14 +26,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:drawableLeft="@drawable/baseline_restaurant_24_mini"
+            android:drawableStart="@drawable/baseline_restaurant_24_mini"
             android:drawablePadding="8dp"
-            android:text="TextView"
+            android:text="@string/textview"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompatTextViewDrawableXml" />
 
         <TextView
             android:id="@+id/food_serving"
@@ -40,15 +42,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:drawableLeft="@drawable/baseline_scale_24_mini"
             android:drawablePadding="8dp"
-            android:drawableTint="@color/complementary_blue"
-            android:text="TextView"
+            android:text="@string/textview_foodserving"
             android:textColor="@color/complementary_blue"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/food_name" />
+            app:layout_constraintTop_toBottomOf="@+id/food_name"
+            app:drawableLeftCompat="@drawable/baseline_scale_24_mini"
+            app:drawableTint="@color/complementary_blue" />
 
         <TextView
             android:id="@+id/food_calories"
@@ -56,15 +58,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:drawableLeft="@drawable/baseline_local_fire_department_24_mini"
             android:drawablePadding="8dp"
-            android:drawableTint="@color/analogous_red"
-            android:text="TextView"
+            android:text="@string/textview_foodcalories"
             android:textColor="@color/analogous_red"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/food_serving" />
+            app:layout_constraintTop_toBottomOf="@+id/food_serving"
+            app:drawableLeftCompat="@drawable/baseline_local_fire_department_24_mini"
+            app:drawableTint="@color/analogous_red" />
 
         <TextView
             android:id="@+id/food_timestamp"
@@ -73,15 +75,15 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
-            android:drawableLeft="@drawable/baseline_access_time_24_mini"
             android:drawablePadding="8dp"
-            android:text="TextView"
+            android:text="@string/textview_foodtimestamp"
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/food_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/food_name"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableLeftCompat="@drawable/baseline_access_time_24_mini" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

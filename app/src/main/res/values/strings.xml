@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">GetInShape_v3</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <string name="home_title">Please enter you details</string>
     <string name="search_title">Search your food here</string>
     <string name="age">Age</string>
@@ -12,21 +9,31 @@
     <string name="weight_kg">Weight (kg)</string>
     <string name="gender">Gender</string>
     <string name="gender_string">Select your gender</string>
-
     <string name="_50g_of_cheese">100g of ground beef</string>
     <string name="search_food">Search</string>
-    <string name="food_name"></string>
-    <string name="calories"></string>
-    <string name="serving_size_g"></string>
-    <string name="date_added"></string>
     <string name="add_to_diary">Add to Diary</string>
-
     <string name="your_target">Your Target:</string>
     <string name="consumed">Consumed:</string>
     <string name="remaining">Remaining:</string>
-
     <string name="home_bmi_str">Keep you BMI between 18.5 and 24.9</string>
     <string name="home_bmi_message_str">Your Body Mass Index (BMI) will be calculated once you enter your information below</string>
+    <string name="login">Login</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="loginBtn">Login</string>
+    <string name="not_yet_registered_sign_up">Not yet registered? Sign Up</string>
+    <string name="join_get_in_shape">Join Get In Shape!</string>
+    <string name="email_hint">Email</string>
+    <string name="password_str">Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="already_an_user_login">Already an user? Login</string>
+    <string name="textview">TextView</string>
+    <string name="textview_foodserving">TextView</string>
+    <string name="textview_foodcalories">TextView</string>
+    <string name="textview_foodtimestamp">TextView</string>
+    <string name="logountbutton">Logout</string>
+    <string name="hello">Hello!</string>
 
     <string-array name="txtGender">
         <item>Gender:</item>

@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Login"
+                android:text="@string/login"
                 android:textAlignment="center"
                 android:textColor="@color/black"
                 android:textSize="36sp"
@@ -42,11 +42,14 @@
                 android:background="@drawable/black_border"
                 android:layout_marginTop="30dp"
                 android:padding="8dp"
-                android:hint="Email"
+                android:hint="@string/email"
                 style="@style/CustomCursorStyle"
-                android:drawableLeft="@drawable/baseline_email_24"
+                android:drawableStart="@drawable/baseline_email_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:importantForAutofill="no"
+                android:inputType="textEmailAddress"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -55,27 +58,30 @@
                 android:background="@drawable/black_border"
                 android:layout_marginTop="20dp"
                 android:padding="8dp"
-                android:hint="Password"
+                android:hint="@string/password"
                 style="@style/CustomCursorStyle"
                 android:inputType="textPassword"
-                android:drawableLeft="@drawable/baseline_password_24"
+                android:drawableStart="@drawable/baseline_password_24"
                 android:drawablePadding="8dp"
-                android:textColor="@color/black" />
+                android:textColor="@color/black"
+                android:importantForAutofill="no"
+                tools:ignore="VisualLintTextFieldSize" />
 
             <Button
+                android:id="@+id/login_button"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:text="Login"
-                android:id="@+id/login_button"
-                android:textSize="18sp"
                 android:layout_marginTop="30dp"
-                app:cornerRadius="30dp" />
+                android:text="@string/loginBtn"
+                android:textSize="18sp"
+                app:cornerRadius="30dp"
+                tools:ignore="DuplicateSpeakableTextCheck,VisualLintButtonSize" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/signupRedirectText"
-                android:text="Not yet registered? Sign Up"
+                android:text="@string/not_yet_registered_sign_up"
                 android:layout_gravity="center"
                 android:padding="10dp"
                 android:layout_marginTop="8dp"

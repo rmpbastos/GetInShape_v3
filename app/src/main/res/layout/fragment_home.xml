@@ -18,6 +18,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:backgroundTint="@color/mustard"
+            android:contentDescription="@string/logountbutton"
+            android:minHeight="48dp"
             android:src="@drawable/baseline_logout_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -28,14 +30,14 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
             android:layout_marginTop="220dp"
-            android:drawableLeft="@drawable/baseline_cake_24"
             android:drawablePadding="8dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:drawableLeftCompat="@drawable/baseline_cake_24" />
 
         <EditText
             android:id="@+id/age_editText"
@@ -60,14 +62,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/baseline_height_24"
             android:drawablePadding="8dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/age_label"
-            app:layout_constraintTop_toBottomOf="@+id/age_label" />
+            app:layout_constraintTop_toBottomOf="@+id/age_label"
+            app:drawableLeftCompat="@drawable/baseline_height_24" />
 
         <EditText
             android:id="@+id/height_editText"
@@ -92,14 +94,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/baseline_monitor_weight_24"
             android:drawablePadding="8dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/height_label"
-            app:layout_constraintTop_toBottomOf="@+id/height_label" />
+            app:layout_constraintTop_toBottomOf="@+id/height_label"
+            app:drawableLeftCompat="@drawable/baseline_monitor_weight_24" />
 
         <EditText
             android:id="@+id/weight_editText"
@@ -124,14 +126,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/baseline_wc_24"
             android:drawablePadding="8dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/weight_label"
-            app:layout_constraintTop_toBottomOf="@+id/weight_label" />
+            app:layout_constraintTop_toBottomOf="@+id/weight_label"
+            app:drawableLeftCompat="@drawable/baseline_wc_24" />
 
         <Spinner
             android:id="@+id/gender_spinner"
@@ -149,14 +151,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/baseline_fitness_center_24"
             android:drawablePadding="8dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/gender_label"
-            app:layout_constraintTop_toBottomOf="@+id/gender_label" />
+            app:layout_constraintTop_toBottomOf="@+id/gender_label"
+            app:drawableLeftCompat="@drawable/baseline_fitness_center_24" />
 
         <Spinner
             android:id="@+id/activity_level_spinner"
@@ -174,14 +176,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:drawableLeft="@drawable/baseline_gps_fixed_24"
             android:drawablePadding="8dp"
             android:text=""
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="@+id/activity_level_label"
-            app:layout_constraintTop_toBottomOf="@+id/activity_level_label" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_level_label"
+            app:drawableLeftCompat="@drawable/baseline_gps_fixed_24" />
 
         <Spinner
             android:id="@+id/objective_spinner"
@@ -201,7 +203,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/btn_bg"
-            android:drawableLeft="@drawable/baseline_save_24"
+            android:drawableStart="@drawable/baseline_save_24"
             android:drawablePadding="8dp"
             android:text="Save"
             android:textColor="@color/white"
@@ -233,7 +235,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="8dp"
-            android:text="Hello!"
+            android:text="@string/hello"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
@@ -251,7 +253,8 @@
             app:layout_constraintBottom_toTopOf="@+id/age_editText"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/home_title">
+            app:layout_constraintTop_toBottomOf="@+id/home_title"
+            tools:ignore="TextSizeCheck">
 
             <LinearLayout
                 android:layout_width="match_parent"

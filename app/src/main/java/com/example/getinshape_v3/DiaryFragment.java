@@ -19,6 +19,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -103,7 +104,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
             loadRecommendedIntake(currentUserEmail);
 
             double calories_remaining = Double.parseDouble(calorie_target_str) - Double.parseDouble(calories_eaten_str);
-            String calories_remaining_str = String.format("%.2f", calories_remaining);
+            String calories_remaining_str = String.format("%.2f kcal", calories_remaining);
             calories_remainingTV.setText(calories_remaining_str);
 
             //Change the text color of the remaining calories if it is < 0
@@ -117,6 +118,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
             e.printStackTrace();
             Toast.makeText(getActivity().getApplicationContext(), "Oops, your diary is empty!", Toast.LENGTH_LONG).show();
         }
+
 
         //Add reference to RecyclerViewTouchHelper
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new RecyclerViewTouchHelper(foodAdapter, context,
@@ -141,8 +143,9 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         Cursor result = dataBaseUserHelper.getUserRecommendedIntake(email);
 
         while (result.moveToNext()) {
-            calorie_targetTV.setText(result.getString(0));
             calorie_target_str = result.getString(0);
+            calorie_targetTV.setText(String.format("%.2f kcal", Double.parseDouble(calorie_target_str)));
+//            calorie_targetTV.setText(result.getString(0));
         }
     }
 
