@@ -27,7 +27,10 @@ import com.example.getinshape_v3.FoodModel.FoodModel;
 import com.example.getinshape_v3.Utils.DataBaseFoodHelper;
 import com.example.getinshape_v3.Utils.DataBaseUserHelper;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Locale;
 
 public class DiaryFragment extends Fragment implements onDialogCloseListener {
 
@@ -40,7 +43,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
 
     Context context;
 
-    private TextView calorie_targetTV, calories_eaten_todayTV, calories_remainingTV;
+    private TextView calorie_targetTV, calories_eaten_todayTV, calories_remainingTV, currentDateTV;
 
     private String currentUserEmail, calorie_target_str, calories_eaten_str;
 
@@ -63,7 +66,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         currentUserEmail = b.getString("currentUserEmail");
 
 
-        // THIS CHUNK OF CODE BELOW IS WORKING
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         dataBaseFoodHelper = new DataBaseFoodHelper(getActivity());
         dataBaseUserHelper = new DataBaseUserHelper(getActivity());
@@ -80,15 +83,20 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRecyclerView.setAdapter(foodAdapter);
-        // THIS CHUNK OF CODE ABOVE IS WORKING
 
 
+        currentDateTV = (TextView) getView().findViewById(R.id.currentDateTV);
         calories_eaten_todayTV = (TextView) getView().findViewById(R.id.calories_eaten_todayTV);
         calorie_targetTV = (TextView) getView().findViewById(R.id.calorie_targetTV);
         calories_remainingTV = (TextView) getView().findViewById(R.id.calories_remainingTV);
 
         try {
 
+            // Get the current date
+            Calendar calendar = Calendar.getInstance();
+            SimpleDateFormat dateFormat = new SimpleDateFormat("EEE, dd MMM", Locale.getDefault());
+            String currentDate = dateFormat.format(calendar.getTime());
+            currentDateTV.setText(currentDate);
 
             loadCalorieIntake(currentUserEmail);
 
@@ -115,7 +123,7 @@ public class DiaryFragment extends Fragment implements onDialogCloseListener {
 
         while (result.moveToNext()) {
             calories_eaten_str = result.getString(0);
-            calories_eaten_todayTV.setText(String.format("%.2f", Double.parseDouble(calories_eaten_str)));
+            calories_eaten_todayTV.setText(String.format("%.2f kcal", Double.parseDouble(calories_eaten_str)));
 //            calories_eaten_todayTV.setText(result.getString(0));
         }
     }
